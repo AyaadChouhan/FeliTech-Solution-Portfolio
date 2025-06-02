@@ -1,0 +1,34 @@
+LogoMarquee.css
+.logo-marquee-container {
+  position: relative;
+}
+
+.logo-marquee {
+  display: flex;
+  animation: scroll 50s linear infinite;
+  will-change: transform;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause animation on hover */
+.logo-marquee-container:hover .logo-marquee {
+  animation-play-state: paused;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .logo-item {
+    margin: 0 20px;
+  }
+  .logo-marquee {
+    animation-duration: 30s;
+  }
+}
