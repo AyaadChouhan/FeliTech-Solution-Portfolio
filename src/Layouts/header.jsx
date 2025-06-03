@@ -1,62 +1,72 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const FixedHeader = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
 
+  const handleMenuItemClick = () => {
+    setIsMenuOpen(false);
+    setIsSolutionsOpen(false);
+  };
+
   return (
-    <nav className="fixed max-w-full w-full top-0 z-50 bg-black border-b shadow-lg ">
-      {/* className="bg-gradient-to-b from-black to-blue-900 text-white pt-12 pb-8 px-6 font-sans" */}
-      <div className="max-w-full mx-auto px-2 sm:px-6 lg:px-8 ">
-        <div className="flex justify-between h-15 items-center">
+    <nav className="fixed max-w-full w-full top-0 z-50 bg-black border-b border-gray-800 shadow-lg backdrop-blur-sm bg-opacity-90">
+      <div className="max-w-full mx-auto px-2 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16 items-center">
           {/* Left Section - Logo */}
           <div className="flex-shrink-0">
             <div className="flex items-center">
-              {/* <img
-                className="h-35 w-55 m-0 p-0 text-white"
-                src="../../public/FeliTech_Solutions-removebg-preview.png"
-                alt=""
-              /> */}
               <svg
-                className="h-15 w-15 text-white"
+                className="h-10 w-10 text-white transition-transform hover:scale-110 duration-300"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path d="M12 4L4 8L12 12L20 8L12 4Z" fill="currentColor" />
+                <path
+                  d="M12 4L4 8L12 12L20 8L12 4Z"
+                  fill="currentColor"
+                  className="text-blue-400"
+                />
                 <path
                   d="M4 12L12 16L20 12"
                   stroke="currentColor"
                   strokeWidth="2"
                   strokeLinecap="round"
+                  className="text-purple-400"
                 />
                 <path
                   d="M4 16L12 20L20 16"
                   stroke="currentColor"
                   strokeWidth="2"
                   strokeLinecap="round"
+                  className="text-blue-300"
                 />
               </svg>
-              <span className="ml-1 text-xl font-bold  bg-blue-400 bg-clip-text text-transparent">
-                FeliTech <span className="text-white">Solution</span>
-              </span>
+              <Link to="/" onClick={handleMenuItemClick}>
+                <span className="ml-2 text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                  FeliTech <span className="text-white">Solutions</span>
+                </span>
+              </Link>
             </div>
           </div>
 
           {/* Center Section - Navigation */}
           <div className="hidden md:flex items-center justify-center flex-1">
-            <div className="flex space-x-8">
-              <div className="relative group">
-                <button
-                  className="text-white hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center transition-colors duration-200"
+            <div className="flex space-x-6">
+              <div className="relative">
+                <Link
+                  className="relative group flex items-center text-gray-300 hover:text-white px-4 py-2 rounded-md text-sm font-medium transition-all duration-300"
                   onClick={() => setIsSolutionsOpen(!isSolutionsOpen)}
-                  onMouseEnter={() => setIsSolutionsOpen(true)}
-                  onMouseLeave={() => setIsSolutionsOpen(false)}
                 >
-                  Solutions
+                  <span className="relative">
+                    Solutions
+                    <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                  </span>
+
                   <svg
-                    className={`ml-1 h-4 w-4 transition-transform duration-200 ${
-                      isSolutionsOpen ? "transform rotate-180" : ""
+                    className={`ml-2 h-4 w-4 transition-transform duration-200 ${
+                      isSolutionsOpen ? "rotate-180" : ""
                     }`}
                     fill="none"
                     viewBox="0 0 24 24"
@@ -69,71 +79,85 @@ const FixedHeader = () => {
                       d="M19 9l-7 7-7-7"
                     />
                   </svg>
-                </button>
+                </Link>
 
-                {/* Dropdown Menu - Improved Styling */}
-                {isSolutionsOpen && (
-                  <div className="absolute z-10 left-1/2 transform -translate-x-1/2 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-100">
-                    <div className="py-1">
-                      {[
-                        "Cloud Solutions",
-                        "AI & ML",
-                        "Data Analytics",
-                        "IoT",
-                        "Blockchain",
-                      ].map((item) => (
-                        <a
-                          key={item}
-                          href="#"
-                          className="block px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-150"
-                        >
-                          {item}
-                        </a>
-                      ))}
-                    </div>
+                {/* Dropdown */}
+                <div
+                  className={`absolute z-20 mt-2 w-56 rounded-xl shadow-lg overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 transition-all duration-300 ease-in-out ${
+                    isSolutionsOpen
+                      ? "opacity-100 translate-y-0 visible"
+                      : "opacity-0 -translate-y-2 invisible"
+                  }`}
+                >
+                  <div className="py-2">
+                    {[
+                      {
+                        label: "Software Development",
+                        path: "/software-development",
+                      },
+                      { label: "Web Designing", path: "/web-designing" },
+                    ].map((item) => (
+                      <Link
+                        key={item.label}
+                        to={item.path}
+                        className="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-gray-700 transition-all duration-200 relative group"
+                      >
+                        {item.label}
+                        <span className="absolute left-4 bottom-2 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-[calc(100%-2rem)]"></span>
+                      </Link>
+                    ))}
                   </div>
-                )}
+                </div>
               </div>
 
-              <a
-                href="#"
-                className="text-white hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
-              >
-                Services
-              </a>
-              <a
-                href="#"
-                className="text-white hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
-              >
-                Industries
-              </a>
-              <a
-                href="#"
-                className="text-white hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
-              >
-                About Us
-              </a>
+              {[
+                { label: "Services", path: "/service" },
+                { label: "Industries", path: "/industries" },
+                { label: "About Us", path: "/about-us" },
+              ].map((item) => (
+                <Link
+                  onClick={handleMenuItemClick}
+                  key={item.label}
+                  to={item.path}
+                  className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 relative group"
+                >
+                  {item.label}
+                  <span className="absolute left-3 bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-[calc(100%-1.5rem)]"></span>
+                </Link>
+              ))}
             </div>
           </div>
 
           {/* Right Section - CTA */}
           <div className="hidden md:flex items-center justify-end">
-            <a
-              href="#contact"
-              className="px-4 py-2 rounded-md text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-md transition-all duration-300 transform hover:-translate-y-0.5"
+            <Link
+              onClick={handleMenuItemClick}
+              to="/contact"
+              className="relative px-5 py-2 rounded-md text-sm font-medium text-white group overflow-hidden"
             >
-              Contact Us
-            </a>
+              <span className="relative z-10" to="/contact">
+                Contact Us
+              </span>
+              <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-md transition-all duration-300 group-hover:from-blue-500 group-hover:to-purple-500"></span>
+              <span className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              <span className="absolute inset-0 shadow-md shadow-blue-500/30 group-hover:shadow-lg group-hover:shadow-blue-500/50 transition-shadow duration-300"></span>
+            </Link>
           </div>
 
           {/* Mobile menu button (right-aligned) */}
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none transition duration-150 ease-in-out"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out"
+              aria-expanded={isMenuOpen}
             >
+              <span className="sr-only">Open main menu</span>
+
+              {/* Hamburger Icon */}
               <svg
-                className={`h-6 w-6 ${isMenuOpen ? "hidden" : "block"}`}
+                className={`h-6 w-6 transform transition-transform duration-300 ease-in-out ${
+                  isMenuOpen ? "scale-0" : "scale-100"
+                }`}
                 stroke="currentColor"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -145,8 +169,12 @@ const FixedHeader = () => {
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
+
+              {/* Close Icon */}
               <svg
-                className={`h-6 w-6 ${isMenuOpen ? "block" : "hidden"}`}
+                className={`h-6 w-6 transform transition-transform duration-300 ease-in-out ${
+                  isMenuOpen ? "scale-100" : "scale-0"
+                }`}
                 stroke="currentColor"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -163,39 +191,36 @@ const FixedHeader = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <div className={`md:hidden ${isMenuOpen ? "block" : "hidden"}`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
-          <a
-            href="#"
-            className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors duration-200"
+      {/* Mobile Menu with Animation */}
+      <div
+        className={`md:hidden overflow-hidden transform transition-all duration-500  ease-in-out origin-top ${
+          isMenuOpen
+            ? "scale-y-100 opacity-100 max-h-[600px]"
+            : "scale-y-0 opacity-0 max-h-0"
+        }`}
+      >
+        <div className="px-4 pt-4 pb-6 space-y-2 bg-gray-900 border-t border-gray-800 shadow-lg  ">
+          {["Solutions", "Services", "Industries", "About Us"].map(
+            (item, index) => (
+              <a
+                key={index}
+                href="#"
+                className="block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 transition-all duration-300 relative group"
+              >
+                {item}
+                <span className="absolute left-4 bottom-2 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500 group-hover:w-[calc(100%-2rem)]"></span>
+              </a>
+            )
+          )}
+
+          {/* Gradient Buttons */}
+          <Link
+            to="/contact"
+            onClick={handleMenuItemClick}
+            className="block w-full px-4 py-3 rounded-lg text-base font-semibold text-white text-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 shadow-md hover:shadow-xl transition-all duration-300"
           >
-            Solutions
-          </a>
-          <a
-            href="#"
-            className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors duration-200"
-          >
-            Services
-          </a>
-          <a
-            href="#"
-            className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors duration-200"
-          >
-            Industries
-          </a>
-          <a
-            href="#"
-            className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors duration-200"
-          >
-            About Us
-          </a>
-          <a
-            href="#contact"
-            className="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-200 text-center mt-2"
-          >
-            Contact Us
-          </a>
+            Contact
+          </Link>
         </div>
       </div>
     </nav>

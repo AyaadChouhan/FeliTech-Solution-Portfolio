@@ -1,55 +1,176 @@
+/* eslint-disable no-empty */
 /* eslint-disable no-unused-vars */
-import {LogoMarquee, ClientReviewsTicker} from "./logoMarque.jsx";
-import { motion } from "framer-motion";
+import { LogoMarquee, ClientReviewsTicker } from "./logoMarque.jsx";
+import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "./dummy.jsx";
-
+import { useState, useEffect } from "react";
 
 function Home() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    phone: "",
+    message: "",
+  });
+  const [index, setIndex] = useState(0);
+
+  const texts = [
+    "Backed by Strategy",
+    "Designed for Scale",
+    "Built to Convert",
+    "Designed for Scale",
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % texts.length);
+    }, 2000); // changes every 2 seconds
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const { name, email, company, message } = formData;
+
+    if (!name || !email || !company || !message) {
+      alert("Please fill all required fields.");
+      return;
+    }
+
+    console.log("Form submitted:", formData);
+    alert("Form submitted successfully!");
+
+    setFormData({
+      name: "",
+      email: "",
+      company: "",
+      phone: "",
+      message: "",
+    });
+  };
   return (
     <div className="relative min-h-screen text-white bg-black overflow-hidden mt-0">
       <div className="absolute inset-0 z-0">
-        <img
-          src="https://framerusercontent.com/images/5xABh708UVqh1ib2gNI0OJGFWY.jpg"
-          alt="Background"
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          // className="w-full h-full object-cover blur"
           className="w-full h-screen object-cover blur-md"
-        />
+        >
+          <source
+            src="https://framerusercontent.com/assets/nuZoVONLPjqFkyWslhLlWTzivo.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+        {/* <div className="inset-0 bg-black/50" /> */}
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-20 flex flex-col lg:flex-row justify-between items-center gap-8 md:gap-12">
         <motion.div
-          className="rounded-xl pt-15 md:p-0 w-full max-w-4xl text-center lg:text-left"
+          className="w-full max-w-4xl text-center lg:text-left"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
+          {/* Main Heading */}
           <motion.h1
-            className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight md:leading-snug mb-4 md:mb-6 text-white"
-            initial={{ scale: 0.9 }}
-            animate={{ scale: 1 }}
+            className="pt-10 font-dm-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight md:leading-snug text-white mb-6"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1.2 }}
           >
-            Website Design Agency Built for High-Growth Brands
-            <span className="text-blue-500 block md:inline">
-              {" "}
-              Backed by Strategy...
+            Website Design Agency Built for{" "}
+            <span className="relative">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+                High-Growth Brands
+              </span>
+              {/* <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full" /> */}
             </span>
+            {/* Animated Rotating Text */}
+            {/* <div className="mb-10 h-16 md:h-20 overflow-hidden"> */}
+            <motion.span
+              key={texts[index]}
+              className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-gray"
+              initial={{
+                x: 100,
+                opacity: 0,
+                backgroundPosition: "100% 50%",
+              }}
+              animate={{
+                x: 0,
+                opacity: 1,
+                backgroundPosition: "0% 50%",
+                transition: {
+                  duration: 0.8,
+                  ease: "circOut",
+                },
+              }}
+              exit={{
+                x: -100,
+                opacity: 0,
+                backgroundPosition: "-100% 50%",
+                transition: { duration: 0.5 },
+              }}
+            >
+              {texts[index]}
+            </motion.span>
+            {/* </div> */}
           </motion.h1>
 
+          {/* Subheading */}
           <motion.p
-            className="text-base md:text-lg text-gray-300 mb-6"
+            className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1 }}
           >
-            Building technology that accelerates your growth.
+            Building technology that{" "}
+            <span className="text-blue-300 font-medium">accelerates</span> your
+            growth.
           </motion.p>
 
-          <motion.button
-            className="bg-gradient-to-r from-purple-600 to-blue-500 px-6 py-3 md:px-8 md:py-3 rounded-xl text-white font-medium text-sm md:text-base shadow-xl hover:scale-105 transform transition duration-300 flex items-center gap-2 mx-auto lg:mx-0"
-            whileHover={{ scale: 1.05 }}
+          {/* CTA Button */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
           >
-            Get in Touch <span className="text-lg">→</span>
-          </motion.button>
+            <motion.button
+              className="relative overflow-hidden group bg-gradient-to-r from-purple-600 to-blue-600 px-8 py-4 rounded-xl text-white font-medium text-lg shadow-2xl hover:shadow-purple-500/40 transition-all duration-300 flex items-center gap-2 mx-auto lg:mx-0"
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 10px 25px -5px rgba(124, 58, 237, 0.4)",
+              }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <span className="relative z-10">Get in Touch</span>
+              <span className="relative z-10">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </span>
+              <span className="absolute inset-0 bg-gradient-to-r from-purple-700 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </motion.button>
+          </motion.div>
         </motion.div>
       </div>
 
@@ -140,8 +261,8 @@ function Home() {
 
       <ClientReviewsTicker />
 
-      <div className="min-h-screen bg-black text-white p-6 md:p-16 flex flex-col lg:flex-row justify-between items-center gap-10">
-        {/* Left Text Section with Animation */}
+      <div className="min-h-screen bg-black text-white p-6 md:p-20 flex flex-col lg:flex-row justify-between items-center gap-10">
+        {/* Left Text Section */}
         <motion.div
           className="w-full lg:w-1/2 space-y-8"
           initial={{ x: -100, opacity: 0 }}
@@ -181,56 +302,102 @@ function Home() {
           </div>
         </motion.div>
 
-        {/* Right Form Section with Animation */}
+        {/* Right Form Section */}
         <motion.div
-          className="w-full lg:w-1/2 bg-zinc-800 p-8 rounded-xl shadow-md"
+          className="w-full max-w-xl p-8 rounded-2xl shadow-md bg-gradient-to-br from-zinc-900 to-black border border-gray-700 relative"
           initial={{ x: 100, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-2xl font-semibold mb-2">Get in Touch</h2>
-          <p className="text-gray-400 mb-6 text-sm">
-            You can reach us anytime.
-          </p>
+          {/* Faded bottom border effect */}
+          <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-25" />
 
-          <form className="space-y-4">
-            <input
-              type="text"
-              placeholder="Full name"
-              className="w-full bg-transparent border-b border-gray-600 focus:outline-none focus:border-blue-500 py-2"
-            />
-            <input
-              type="email"
-              placeholder="Work email"
-              className="w-full bg-transparent border-b border-gray-600 focus:outline-none focus:border-blue-500 py-2"
-            />
-            <input
-              type="tel"
-              placeholder="+1 415 555 0132"
-              className="w-full bg-transparent border-b border-gray-600 focus:outline-none focus:border-blue-500 py-2"
-            />
-            <select className="w-full bg-transparent border-b border-gray-600 focus:outline-none focus:border-blue-500 py-2">
-              <option className="text-black">Performance Marketing</option>
-              <option className="text-black">SEO</option>
-              <option className="text-black">Branding</option>
-            </select>
-            <input
-              type="url"
-              placeholder="https://yourcompany.com"
-              className="w-full bg-transparent border-b border-gray-600 focus:outline-none focus:border-blue-500 py-2"
-            />
-            <textarea
-              placeholder="Message"
-              rows="3"
-              className="w-full bg-transparent border-b border-gray-600 focus:outline-none focus:border-blue-500 py-2 resize-none"
-            ></textarea>
-            <button
-              type="submit"
-              className="bg-blue-100 text-black px-6 py-2 rounded-full font-medium hover:bg-blue-200 transition"
-            >
-              Submit
-            </button>
+          <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+            {/* Row 1 */}
+            <div className=" p-5 flex flex-col md:flex-row gap-6">
+              <div className="w-full">
+                <label className="text-sm font-medium block mb-1">
+                  Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  type="text"
+                  placeholder="Enter your Name"
+                  className="w-full bg-transparent border-b border-gray-600 focus:outline-none focus:border-white py-2 text-sm placeholder-gray-400"
+                />
+              </div>
+              <div className="w-full ">
+                <label className="text-sm font-medium block mb-1">
+                  Email <span className="text-red-500">*</span>
+                </label>
+                <input
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  type="email"
+                  placeholder="example@mail.com"
+                  className="w-full bg-transparent border-b border-gray-600 focus:outline-none focus:border-white py-2 text-sm placeholder-gray-400"
+                />
+              </div>
+            </div>
+
+            {/* Company Name */}
+            <div className="p-5">
+              <label className="text-sm font-medium block mb-1">
+                Company Name <span className="text-red-500">*</span>
+              </label>
+              <input
+                name="company"
+                value={formData.company}
+                onChange={handleChange}
+                type="text"
+                placeholder="Ex. Miya Infotech"
+                className="w-full bg-transparent border-b border-gray-600 focus:outline-none focus:border-white py-2 text-sm placeholder-gray-400"
+              />
+            </div>
+
+            {/* Phone number */}
+            <div className="p-5">
+              <label className="text-sm font-medium block mb-1">
+                Phone number
+              </label>
+              <input
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                type="tel"
+                placeholder="Ex +91 xxxxxxxxxx"
+                className="w-full bg-transparent border-b border-gray-600 focus:outline-none focus:border-white py-2 text-sm placeholder-gray-400"
+              />
+            </div>
+
+            {/* Message */}
+            <div className="p-5">
+              <label className="text-sm font-medium block mb-1">
+                Message <span className="text-red-500">*</span>
+              </label>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Enter your Message"
+                className="w-full bg-transparent border-b border-gray-600 focus:outline-none focus:border-white py-2 resize-none text-sm placeholder-gray-400"
+                rows="3"
+              ></textarea>
+            </div>
+
+            {/* Submit */}
+            <div>
+              <button
+                type="submit"
+                className="border border-white px-6 py-2 rounded-md text-white hover:bg-white hover:text-black transition duration-300 ease-in-out"
+              >
+                Submit
+              </button>
+            </div>
           </form>
         </motion.div>
       </div>

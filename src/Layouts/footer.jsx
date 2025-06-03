@@ -3,12 +3,12 @@ import { FaFacebookF, FaLinkedinIn, FaInstagram, FaTwitter } from "react-icons/f
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-b from-black to-blue-900 text-white pt-12 pb-8 px-6 font-sans">
+    <footer className=" bg-gradient-to-b from-black to-blue-900 text-white pt-12 pb-8 px-6 font-sans">
       <div className="max-w-6xl mx-auto">
         {/* Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           {/* Contact Info */}
-          <div>
+          <div >
             <h3 className="font-bold text-lg mb-5 text-white">Contact Us</h3>
             <ul className="space-y-3 text-gray-300 text-sm">
               <li className="hover:text-white transition flex items-start">

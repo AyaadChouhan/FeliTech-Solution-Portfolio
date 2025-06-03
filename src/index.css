@@ -9,7 +9,6 @@
   animation: fadeIn 1s ease-out forwards;
 } */
 
-
 @layer utilities {
   .animate-marquee {
     animation: marquee 40s linear infinite;
