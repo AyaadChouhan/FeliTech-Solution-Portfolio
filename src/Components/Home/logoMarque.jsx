@@ -10,7 +10,7 @@ const LogoMarquee = () => {
   return (
     <div className="logo-marquee-container  overflow-hidden py-3 ">
       <div className="logo-marquee-wrapper  flex items-center">
-        <div className="logo-marquee flex items-center bg-black">
+        <div className="logo-marquee flex items-center ">
           {duplicatedLogos.map((logo, index) => (
             <div
               key={`logo-${index}`}
@@ -48,7 +48,7 @@ const ClientReviewsTicker = () => {
     const ticker2 = tickerRef2.current;
 
     if (ticker1 && ticker2) {
-      const duration = 90000; // 40 seconds for full loop
+      const duration = 102000; // 40 seconds for full loop
       const startTime = Date.now();
 
       const animate = () => {
@@ -67,7 +67,8 @@ const ClientReviewsTicker = () => {
 
   return (
     <motion.section
-      className="py-16 bg-gradient-to-b from-gray-900 to-black overflow-hidden relative"
+      // className="py-16 overflow-hidden relative border-t transform-border border-white "
+      className="py-16 overflow-hidden relative     border-t border-gray-700  w-full my-4  "
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
@@ -86,7 +87,7 @@ const ClientReviewsTicker = () => {
         <div className="relative h-72 mb-8 overflow-hidden">
           <div
             ref={tickerRef1}
-            className="absolute top-0 left-0 flex space-x-8 w-max"
+            className="absolute top-0 left-0 flex space-x-8 w-max 0-10"
             style={{ willChange: "transform" }}
           >
             {duplicatedReviews.map((review, index) => (
@@ -118,15 +119,15 @@ const ClientReviewsTicker = () => {
 const ReviewCard = ({ review }) => {
   return (
     <motion.div
-      className="w-80 flex-shrink-0 bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-blue-500/20 transition-all"
-      whileHover={{ y: -10 }}
+      className="w-full max-w-md bg-black border border-gray-700 rounded-2xl p-8 shadow-lg hover:shadow-white/10 transition-all duration-300"
+      // whileHover={{ y: -5 }}
     >
       <div className="flex items-center mb-4">
         {[...Array(5)].map((_, i) => (
           <svg
             key={i}
-            className={`w-5 h-5 ${
-              i < review.rating ? "text-yellow-400" : "text-gray-600"
+            className={`w-5 h-5 transition-colors duration-200 ${
+              i < review.rating ? "text-white" : "text-gray-600"
             }`}
             fill="currentColor"
             viewBox="0 0 20 20"
@@ -135,14 +136,20 @@ const ReviewCard = ({ review }) => {
           </svg>
         ))}
       </div>
-      <p className="text-gray-300 mb-6 italic">"{review.comment}"</p>
+
+      <p className="text-gray-400 mb-6 italic border-l-4 border-white pl-4">
+        “{review.comment}”
+      </p>
+
       <div className="flex items-center">
-        <div className="bg-blue-500 rounded-full w-10 h-10 flex items-center justify-center text-white font-bold">
+        <div className="bg-white text-black rounded-full w-10 h-10 flex items-center justify-center text-sm font-bold">
           {review.name.charAt(0)}
         </div>
         <div className="ml-4">
-          <h4 className="text-white font-medium">{review.name}</h4>
-          <p className="text-blue-400 text-sm">{review.role}</p>
+          <h4 className="text-white font-semibold">{review.name}</h4>
+          <p className="text-gray-500 text-xs uppercase tracking-wider">
+            {review.role}
+          </p>
         </div>
       </div>
     </motion.div>
