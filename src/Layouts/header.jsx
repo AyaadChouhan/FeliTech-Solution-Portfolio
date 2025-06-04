@@ -60,7 +60,7 @@ const FixedHeader = () => {
                   onClick={() => setIsSolutionsOpen(!isSolutionsOpen)}
                 >
                   <span className="relative">
-                    Solutions
+                    Technology Services
                     <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
                   </span>
 
@@ -111,7 +111,7 @@ const FixedHeader = () => {
               </div>
 
               {[
-                { label: "Services", path: "/service" },
+                { label: "Our Clients", path: "/our-clients" },
                 { label: "Industries", path: "/industries" },
                 { label: "About Us", path: "/about-us" },
               ].map((item) => (
@@ -193,33 +193,90 @@ const FixedHeader = () => {
 
       {/* Mobile Menu with Animation */}
       <div
-        className={`md:hidden overflow-hidden transform transition-all duration-500  ease-in-out origin-top ${
+        className={`md:hidden overflow-hidden transform transition-all duration-500 ease-in-out origin-top ${
           isMenuOpen
-            ? "scale-y-100 opacity-100 max-h-[600px]"
+            ? "scale-y-100 opacity-100 max-h-[800px]"
             : "scale-y-0 opacity-0 max-h-0"
         }`}
       >
-        <div className="px-4 pt-4 pb-6 space-y-2 bg-gray-900 border-t border-gray-800 shadow-lg  ">
-          {["Solutions", "Services", "Industries", "About Us"].map(
-            (item, index) => (
-              <a
-                key={index}
-                href="#"
-                className="block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 transition-all duration-300 relative group"
+        <div className="px-4 pt-4 pb-6 space-y-2 bg-gray-900 border-t border-gray-800 shadow-lg">
+          {/* Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setIsSolutionsOpen(!isSolutionsOpen)}
+              className="w-full flex justify-between items-center px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 transition-all duration-300"
+            >
+              Technology Services
+              <svg
+                className={`w-5 h-5 transition-transform duration-300 ${
+                  isSolutionsOpen ? "transform rotate-180" : ""
+                }`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                {item}
-                <span className="absolute left-4 bottom-2 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500 group-hover:w-[calc(100%-2rem)]"></span>
-              </a>
-            )
-          )}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
 
-          {/* Gradient Buttons */}
+            <div
+              className={`mt-1 w-full rounded-lg overflow-hidden transition-all duration-300 ease-in-out ${
+                isSolutionsOpen
+                  ? "opacity-100 translate-y-0 max-h-[200px]"
+                  : "opacity-0 -translate-y-2 max-h-0"
+              }`}
+            >
+              <div className="py-1 bg-gray-800 border border-gray-700 rounded-lg">
+                {[
+                  {
+                    label: "Software Development",
+                    path: "/software-development",
+                  },
+                  { label: "Web Designing", path: "/web-designing" },
+                ].map((item) => (
+                  <Link
+                    key={item.label}
+                    to={item.path}
+                    className="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-gray-700 transition-all duration-200 relative group"
+                    onClick={handleMenuItemClick}
+                  >
+                    {item.label}
+                    <span className="absolute left-4 bottom-2 w-0 h-0.5 bg-blue-400 transition-all duration-300 group-hover:w-[calc(100%-2rem)]"></span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Other Menu Items */}
+          {[
+            { label: "Our Clients", path: "/service" },
+            { label: "Industries", path: "/industries" },
+            { label: "About Us", path: "/about-us" },
+          ].map((item, index) => (
+            <Link
+              key={index}
+              to={item.path}
+              className="block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 transition-all duration-300 relative group"
+              onClick={handleMenuItemClick}
+            >
+              {item.label}
+              <span className="absolute left-4 bottom-2 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500 group-hover:w-[calc(100%-2rem)]"></span>
+            </Link>
+          ))}
+
+          {/* Contact Button */}
           <Link
             to="/contact"
             onClick={handleMenuItemClick}
-            className="block w-full px-4 py-3 rounded-lg text-base font-semibold text-white text-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 shadow-md hover:shadow-xl transition-all duration-300"
+            className="block w-full px-4 py-3 mt-2 rounded-lg text-base font-semibold text-white text-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 shadow-md hover:shadow-lg transition-all duration-300"
           >
-            Contact
+            Contact Us
           </Link>
         </div>
       </div>

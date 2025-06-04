@@ -67,7 +67,9 @@ function Home() {
           className="w-full h-screen object-cover blur-md"
         >
           <source
-            src="https://framerusercontent.com/assets/nuZoVONLPjqFkyWslhLlWTzivo.mp4"
+            // src="https://framerusercontent.com/assets/nuZoVONLPjqFkyWslhLlWTzivo.mp4"
+                        src="https://framerusercontent.com/assets/PkmYQkqvhyMvIMa3NkUsdjjoo8Y.mp4"
+
             type="video/mp4"
           />
           Your browser does not support the video tag.
