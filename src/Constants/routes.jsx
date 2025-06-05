@@ -1,11 +1,11 @@
 const ROUTES = {
   HOME: "/",
+  OURPROJECTS: "/our-projects",
+  OURCLIENTS: "/our-clients",
+  SOFTWARESERVICES: "/software-services",
   CONTACT: "/contact",
   ABOUT: "/about-us",
-  WEBSERVICE: "/web-designing",
-  SOFTWARESERVICES: "/software-development",
-  // SOFTWARESERVICES: "/software-service",
-  // SOFTWARESERVICES: "/software-service"
+  WEBSERVICE: "/web-services",
 };
 
 export { ROUTES };

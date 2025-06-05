@@ -6,6 +6,8 @@ import Contact from "@components/Contact/index";
 import About from "@components/About/index";
 import WebService from "@components/WebService/index";
 import SoftwareServices from "@components/SoftwareService/index";
+import OurClients from "@components/OurClients/index";
+import OurProjects from "@components/OurProjects/index";
 
 const AppRoutes = () => {
   return useRoutes([
@@ -14,6 +16,22 @@ const AppRoutes = () => {
       element: (
         <MainLayout>
           <Home />
+        </MainLayout>
+      ),
+    },
+    {
+      path: ROUTES.OURPROJECTS,
+      element: (
+        <MainLayout>
+          <OurProjects />
+        </MainLayout>
+      ),
+    },
+    {
+      path: ROUTES.OURCLIENTS,
+      element: (
+        <MainLayout>
+          <OurClients />
         </MainLayout>
       ),
     },

@@ -1,14 +1,5 @@
 @import "tailwindcss";
 
-/* @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 1s ease-out forwards;
-} */
-
 @layer utilities {
   .animate-marquee {
     animation: marquee 40s linear infinite;
@@ -34,5 +25,23 @@
     100% {
       transform: translateX(100%);
     }
+  }
+}
+
+
+/* styles.css */
+html {
+  scroll-behavior: smooth;
+  scroll-timeline: auto;
+}
+
+/* Make scrolling slower */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+  * {
+    scroll-behavior: smooth !important;
+    scroll-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
   }
 }

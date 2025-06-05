@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "./dummy.jsx";
 import { useState, useEffect } from "react";
 
+import { Link } from "react-router-dom";
 function Home() {
   const [formData, setFormData] = useState({
     name: "",
@@ -64,12 +65,11 @@ function Home() {
           playsInline
           preload="auto"
           // className="w-full h-full object-cover blur"
-          className="w-full h-screen object-cover blur-md"
+          className="w-full h-[79vh] object-cover blur-md"
         >
           <source
             // src="https://framerusercontent.com/assets/nuZoVONLPjqFkyWslhLlWTzivo.mp4"
-                        src="https://framerusercontent.com/assets/PkmYQkqvhyMvIMa3NkUsdjjoo8Y.mp4"
-
+            src="https://framerusercontent.com/assets/PkmYQkqvhyMvIMa3NkUsdjjoo8Y.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.
@@ -86,7 +86,9 @@ function Home() {
         >
           {/* Main Heading */}
           <motion.h1
-            className="pt-10 font-dm-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight md:leading-snug text-white mb-6"
+            // className="pt-10 font-dm-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight md:leading-snug text-white mb-6"
+                            className="font-dm-sans text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-snug text-transparent bg-clip-text bg-gradient-to-r from-white to-white/30 mb-6"
+
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1.2 }}
@@ -155,7 +157,9 @@ function Home() {
               }}
               whileTap={{ scale: 0.98 }}
             >
-              <span className="relative z-10">Get in Touch</span>
+              <Link to="/our-projects" className="relative z-10">
+                Get in Touch
+              </Link>
               <span className="relative z-10">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -201,7 +205,7 @@ function Home() {
         </motion.p>
       </div>
 
-      <div className="relative z-10 max-w-full mx-auto px-4 sm:px-6 mb-20 rounded-2xl">
+      <div className="relative z-10 max-w-full mx-auto px-4 sm:px-6 mb-10 rounded-2xl">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
@@ -250,23 +254,49 @@ function Home() {
                   initial={{ y: 20, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.3 }}
-                >
-                  <span className="inline-block bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
-                    {project.title}
-                  </span>
-                </motion.div>
+                ></motion.div>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
 
+      <motion.div className="flex justify-center">
+        <motion.button
+          className="relative overflow-hidden group bg-gradient-to-r from-purple-600 to-blue-600 px-8 py-4 rounded-xl text-white font-medium text-lg shadow-2xl hover:shadow-purple-500/40 transition-all duration-300 flex items-center gap-2 mx-auto lg:mx-0"
+          whileHover={{
+            scale: 1.05,
+            boxShadow: "0 10px 25px -5px rgba(124, 58, 237, 0.4)",
+          }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <Link to="/our-projects" className="relative z-10">
+            MORE
+          </Link>
+          <span className="relative z-10">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </span>
+          {/* <span className="absolute inset-0 bg-gradient-to-r from-purple-700 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" /> */}
+        </motion.button>
+      </motion.div>
+
       <ClientReviewsTicker />
 
-      <div className="min-h-screen bg-black text-white p-6 md:p-20 flex flex-col lg:flex-row justify-between items-center gap-10">
+      <div className="min-h-screen bg-black text-white p-6 md:p-25 flex flex-col lg:flex-row justify-between items-center gap-10">
         {/* Left Text Section */}
         <motion.div
-          className="w-full lg:w-1/2 space-y-8"
+          className="w-full lg:w-1/2 space-y-10"
           initial={{ x: -100, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
