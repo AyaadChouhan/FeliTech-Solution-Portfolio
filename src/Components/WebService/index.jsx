@@ -7,12 +7,11 @@ import { useInView } from "react-intersection-observer";
 import "./index.css";
 import { Link } from "react-router-dom";
 import { ClientReviewsTicker } from "../Home/logoMarque";
-import {cardData} from './mock'
+import { cardData } from "./mock";
+
 function About() {
-
-
   return (
-   <div className="relative min-h-screen text-white bg-black bg-fade overflow-hidden mt-0">
+    <div className="relative min-h-screen text-white bg-black bg-fade overflow-hidden mt-0">
       {/* Background Video */}
       <div className="absolute inset-0 z-10 ">
         <video
@@ -22,7 +21,7 @@ function About() {
           playsInline
           preload="auto"
           // className="w-full h-full object-cover blur"
-          className="w-full h-screen object-cover blur-md"
+          className="w-full h-[79vh] object-cover blur-md"
         >
           <source
             src="https://framerusercontent.com/assets/nuZoVONLPjqFkyWslhLlWTzivo.mp4"

@@ -83,7 +83,7 @@ const FixedHeader = () => {
 
                 {/* Dropdown */}
                 <div
-                  className={`absolute z-20 mt-2 w-56 rounded-xl shadow-lg overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 transition-all duration-300 ease-in-out ${
+                  className={`absolute z-20 mt-2 w-56 rounded-xl shadow-lg overflow-hidden bg-gradient-to-br from-gray-800 to-black border border-white transition-all duration-300 ease-in-out ${
                     isSolutionsOpen
                       ? "opacity-100 translate-y-0 visible"
                       : "opacity-0 -translate-y-2 invisible"
@@ -93,11 +93,12 @@ const FixedHeader = () => {
                     {[
                       {
                         label: "Software Development",
-                        path: "/software-development",
+                        path: "/software-services",
                       },
-                      { label: "Web Designing", path: "/web-designing" },
+                      { label: "Web Designing", path: "/web-services" },
                     ].map((item) => (
                       <Link
+                        onClick={handleMenuItemClick}
                         key={item.label}
                         to={item.path}
                         className="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-gray-700 transition-all duration-200 relative group"
@@ -112,7 +113,7 @@ const FixedHeader = () => {
 
               {[
                 { label: "Our Clients", path: "/our-clients" },
-                { label: "Industries", path: "/industries" },
+                { label: "Our Projects", path: "/our-projects" },
                 { label: "About Us", path: "/about-us" },
               ].map((item) => (
                 <Link
@@ -235,9 +236,9 @@ const FixedHeader = () => {
                 {[
                   {
                     label: "Software Development",
-                    path: "/software-development",
+                    path: "/software-services",
                   },
-                  { label: "Web Designing", path: "/web-designing" },
+                  { label: "Web Designing", path: "/web-services" },
                 ].map((item) => (
                   <Link
                     key={item.label}
@@ -255,8 +256,8 @@ const FixedHeader = () => {
 
           {/* Other Menu Items */}
           {[
-            { label: "Our Clients", path: "/service" },
-            { label: "Industries", path: "/industries" },
+            { label: "Our Clients", path: "/our-clients" },
+            { label: "Our Projects", path: "/our-projects" },
             { label: "About Us", path: "/about-us" },
           ].map((item, index) => (
             <Link
