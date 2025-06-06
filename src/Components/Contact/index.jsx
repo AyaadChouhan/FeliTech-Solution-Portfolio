@@ -132,7 +132,7 @@ function Contact() {
                 value={formData.company}
                 onChange={handleChange}
                 type="text"
-                placeholder="Ex. Miya Infotech"
+                placeholder="Ex. FeliTech Solutions"
                 className="w-full bg-transparent border-b border-gray-600 focus:outline-none focus:border-white py-2 text-sm placeholder-gray-400"
               />
             </div>
